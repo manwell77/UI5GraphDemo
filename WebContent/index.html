@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'/>
+
+		<script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+				id="sap-ui-bootstrap"
+				data-sap-ui-libs="sap.m"
+				data-sap-ui-theme="sap_bluecrystal"
+                data-sap-ui-bindingSyntax="complex">				
+		</script>
+
+		<script>
+		        // resources
+				sap.ui.localResources("graphdemo");
+				// data model
+				var oData = new sap.ui.model.json.JSONModel();
+				oData.setData( { "suppliers": [ { "SupplierName": "Vendor A", "Cost": "10", "Revenue": "20" }, 
+					                            { "SupplierName": "Vendor B", "Cost": "5", "Revenue": "70" } ],
+						         "products" : [ { "Quarter": "Q1", "MitoCurrYear": "20", "MitoPrevYear": "30", "GiuliettaCurrYear": "40", "GiuliettaPrevYear": "35", "GiuliaCurrYear": "48", "GiuliaPrevYear": "20" },
+						        	 			{ "Quarter": "Q2", "MitoCurrYear": "30", "MitoPrevYear": "20", "GiuliettaCurrYear": "10", "GiuliettaPrevYear": "20", "GiuliaCurrYear": "10", "GiuliaPrevYear": "5" },
+						        	 			{ "Quarter": "Q3", "MitoCurrYear": "35", "MitoPrevYear": "20", "GiuliettaCurrYear": "15", "GiuliettaPrevYear": "20", "GiuliaCurrYear": "15", "GiuliaPrevYear": "5" },
+						        	 			{ "Quarter": "Q4", "MitoCurrYear": "60", "MitoPrevYear": "20", "GiuliettaCurrYear": "20", "GiuliettaPrevYear": "20", "GiuliaCurrYear": "20", "GiuliaPrevYear": "5" } ],
+						         "regions"  : [ { "RegionName": "EMEA", "Revenue": "450" },
+						        	            { "RegionName": "NAFTA", "Revenue": "222" },
+						        	            { "RegionName": "EMEA", "Revenue": "450" },
+						        	            { "RegionName": "APAC", "Revenue": "111" },
+						        	            { "RegionName": "LATAM", "Revenue": "215" } ],
+						         "sequence" : [ { "Year": "2014", "Revenue": "378", "Cost": "289" },
+						        	            { "Year": "2015", "Revenue": "572", "Cost": "457" },
+						        	            { "Year": "2016", "Revenue": "584", "Cost": "463" },
+						        	            { "Year": "2017", "Revenue": "622", "Cost": "542" },
+						        	            { "Year": "2018", "Revenue": "750", "Cost": "550" } ],
+						         "address"  : { "HouseNo": "21", "Street": "Via Caldera", "ZIP": "20153", "City": "Milano", "Region": "Milano", "Country": "Italia" }
+								} );
+				sap.ui.getCore().setModel(oData, "srvdata"); oData.setDefaultBindingMode("OneWay"); 				
+				// layout
+				var app = new sap.m.App({initialPage:"idmain1"});
+				var page = sap.ui.view({id:"idmain1", viewName:"graphdemo.main", type:sap.ui.core.mvc.ViewType.XML});
+				app.addPage(page);
+				app.placeAt("content");
+		</script>
+
+	</head>
+	<body class="sapUiBody" role="application">
+		<div id="content"></div>
+	</body>
+</html>

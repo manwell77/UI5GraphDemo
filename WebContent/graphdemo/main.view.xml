@@ -1,0 +1,129 @@
+<core:View xmlns:core="sap.ui.core" 
+           xmlns="sap.m"
+           xmlns:mc="sap.suite.ui.microchart"
+           xmlns:viz="sap.viz.ui5.controls" 
+           xmlns:layout="sap.ui.layout"
+           xmlns:mvc="sap.ui.core.mvc" 
+           xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+           xmlns:viz.data="sap.viz.ui5.data" 
+           xmlns:html="http://www.w3.org/1999/xhtml"
+		   controllerName="graphdemo.main">
+	<Page title="Title">
+		<content>
+			<layout:VerticalLayout width="100%" class="gridWrapper">
+				<layout:Grid	containerQuery=" ">
+				    <layout:FixFlex id='chartFixFlex1' minFlexSize="300">
+				        <layout:flexContent>
+				            <viz:VizFrame id="idVizFrame1" height='100%' width="100%" vizType='bar' vizProperties="{dataLabel:{ showTotal: true}}">
+				                <viz:dataset>
+				                    <viz.data:FlattenedDataset data="{srvdata>/suppliers}">
+				                        <viz.data:dimensions>
+				                            <viz.data:DimensionDefinition name="SupplierName" value="{srvdata>SupplierName}" />
+				                        </viz.data:dimensions>
+				                        <viz.data:measures>
+				                            <viz.data:MeasureDefinition name="Revenue" value="{srvdata>Revenue}" />
+				                            <viz.data:MeasureDefinition name="Cost" value="{srvdata>Cost}" />
+				                        </viz.data:measures>
+				                    </viz.data:FlattenedDataset>
+				                </viz:dataset>
+				                <viz:feeds>
+				                    <viz.feeds:FeedItem id='valueAxisFeed11' uid="valueAxis" type="Measure" values="Revenue" />
+				                    <viz.feeds:FeedItem id='valueAxisFeed12' uid="valueAxis" type="Measure" values="Cost" />
+				                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="SupplierName" />
+				                </viz:feeds>
+				            </viz:VizFrame>
+				        </layout:flexContent>
+				    </layout:FixFlex>
+				    <layout:FixFlex id='chartFixFlex2' minFlexSize="300">
+				        <layout:flexContent>
+				            <viz:VizFrame id="idVizFrame2" height='100%' width="100%" vizType='dual_stacked_column' vizProperties="{dataLabel:{ showTotal: true}}">
+				                <viz:dataset>
+				                    <viz.data:FlattenedDataset data="{srvdata>/products}">
+				                        <viz.data:dimensions>
+				                            <viz.data:DimensionDefinition name="Quarter" value="{srvdata>Quarter}" />
+				                        </viz.data:dimensions>
+				                        <viz.data:measures>
+				                            <viz.data:MeasureDefinition name="Mito2017" value="{srvdata>MitoCurrYear}" />
+				                            <viz.data:MeasureDefinition name="Mito2016" value="{srvdata>MitoPrevYear}" />
+				                            <viz.data:MeasureDefinition name="Giulietta2017" value="{srvdata>GiuliettaCurrYear}" />
+				                            <viz.data:MeasureDefinition name="Giulietta2016" value="{srvdata>GiuliettaPrevYear}" />
+				                            <viz.data:MeasureDefinition name="Giulia2017" value="{srvdata>GiuliaCurrYear}" />
+				                            <viz.data:MeasureDefinition name="Giulia2016" value="{srvdata>GiuliaPrevYear}" />				                            
+				                        </viz.data:measures>
+				                    </viz.data:FlattenedDataset>
+				                </viz:dataset>
+				                <viz:feeds>
+				                    <viz.feeds:FeedItem id='valueAxisFeed21' uid="valueAxis" type="Measure" values="Mito2017,Giulietta2017,Giulia2017" />
+				                    <viz.feeds:FeedItem id='valueAxisFeed22' uid="valueAxis2" type="Measure" values="Mito2016,Giulietta2016,Giulia2016" />
+				                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension" values="Quarter" />
+				                </viz:feeds>
+				            </viz:VizFrame>
+				        </layout:flexContent>
+				    </layout:FixFlex>
+				    <layout:FixFlex id='chartFixFlex3' minFlexSize="300">
+				        <layout:flexContent>				    
+						    <layout:VerticalLayout>
+								<TileContent footer="Current Quarter" unit="EUR" class="sapUiSmallMargin">
+									<content>
+										<NumericContent scale="M" value="1.96"	valueColor="Error" indicator="Down" />
+									</content>
+								</TileContent>
+								<TileContent footer="Previous Quarter" unit="EUR" class="sapUiSmallMargin">
+									<content>
+										<NumericContent scale="M" value="2.64"	valueColor="Good" indicator="Up" />
+									</content>
+								</TileContent>
+						    </layout:VerticalLayout>
+				        </layout:flexContent>
+				    </layout:FixFlex>				    
+				    <layout:FixFlex id='chartFixFlex4' minFlexSize="300">
+				        <layout:flexContent>				    
+				            <viz:VizFrame id="idVizFrame4" height='100%' width="100%" vizType='pie'>
+				                <viz:dataset>
+				                    <viz.data:FlattenedDataset data="{srvdata>/regions}">
+				                        <viz.data:dimensions>
+				                            <viz.data:DimensionDefinition name="Region" value="{srvdata>RegionName}" />
+				                        </viz.data:dimensions>
+				                        <viz.data:measures>
+				                            <viz.data:MeasureDefinition name="Revenue" value="{srvdata>Revenue}" />
+				                        </viz.data:measures>
+				                    </viz.data:FlattenedDataset>
+				                </viz:dataset>
+				                <viz:feeds>
+				                    <viz.feeds:FeedItem uid="size" type="Measure" values="Revenue" />
+				                    <viz.feeds:FeedItem uid="color" type="Dimension" values="Region" />
+				                </viz:feeds>
+				            </viz:VizFrame>
+				        </layout:flexContent>
+				    </layout:FixFlex>						    
+				    <layout:FixFlex id='chartFixFlex5' minFlexSize="300">
+				        <layout:flexContent>				    
+				            <viz:VizFrame id="idVizFrame5" height='100%' width="100%" vizType='line'>
+				                <viz:dataset>
+				                    <viz.data:FlattenedDataset data="{srvdata>/sequence}">
+				                        <viz.data:dimensions>
+				                            <viz.data:DimensionDefinition name="Year" value="{srvdata>Year}" />
+				                        </viz.data:dimensions>
+				                        <viz.data:measures>
+				                            <viz.data:MeasureDefinition name="Revenue" value="{srvdata>Revenue}" />
+				                            <viz.data:MeasureDefinition name="Cost" value="{srvdata>Cost}" />
+				                        </viz.data:measures>
+				                    </viz.data:FlattenedDataset>
+				                </viz:dataset>			
+				                <viz:feeds>
+				                    <viz.feeds:FeedItem id='valueAxisFeed51' uid="valueAxis" type="Measure" values="Revenue,Cost" />
+				                    <viz.feeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Year" />
+				                </viz:feeds>
+				            </viz:VizFrame>			
+				        </layout:flexContent>
+				    </layout:FixFlex>	
+				    <layout:FixFlex id='chartFixFlex6' minFlexSize="300">
+				        <layout:flexContent>	 
+				    		<core:HTML content="{parts:[{path:'srvdata>/address/HouseNo'},{path:'srvdata>/address/Street'},{path:'srvdata>/address/ZIP'},{path:'srvdata>/address/City'},{path:'srvdata>/address/Region'},{path:'srvdata>/address/Country'}],formatter:'.formatter.formatMapUrl'}"/>	
+				        </layout:flexContent>
+				    </layout:FixFlex>		                
+				</layout:Grid>				
+			</layout:VerticalLayout>			    
+		</content>
+	</Page>
+</core:View>
